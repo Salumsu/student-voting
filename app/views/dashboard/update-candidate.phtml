@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update candidate</title>
+</head>
+<body>
+    <div class="body-container">
+        
+        <?php 
+            if (file_exists($navigation_bar)) {
+                require $navigation_bar;
+            }
+            echo "<main>";
+            if ($picked_candidate_id) {
+                if ($picked_candidate) {
+                    ?>
+                    <form method="POST" action="<?php echo $paths['CONTROLLER_PATH'] . 'update-candidate.php' ?>">
+                        <input type="hidden" name="candidateid" value=<?php echo $picked_candidate->candidate_id; ?>>
+                        <div class="input-group">
+                            <label>Full name</label>
+                            <input type="text" name="candidatename" value=<?php echo "$picked_candidate->candidate_name"; ?>>
+                        </div>
+                        <div class="input-group">
+                            <label>Year Level</label>
+                            <input type="number" name="yearlevel" value=<?php echo $picked_candidate->year_level; ?>>
+                        </div>
+                        <div class="input-group">
+                            <label>Change position</label>
+                            <?php
+                                $positions->form_select();
+                                ?>
+                        </div>
+                        <input type="submit" value="Update">
+                    </form>
+                    <?php
+                } else {
+                    echo "<h5>Candidate not found</h5><br/>
+                    <a href= " . $dashboard_paths['BASE_PATH'] . "&current=update-candidate" . ">Search again</a>";
+                }
+            } else {
+                ?>
+                    <form action=<?php echo $dashboard_paths['BASE_PATH']; ?>>
+                        <input type="hidden" name="page" value="dashboard">
+                        <input type="hidden" name="current" value="update-candidate">
+                        <h4>Search for a candidate</h4>
+                        <label>Enter the candidate id here: </label>
+                        <input type="number" name="candidateid" >
+                        <input type="submit" value="Search">
+                    </form>
+                    <?php
+            }
+            ?>
+        </main>
+    </div>
+</body>
+</html>

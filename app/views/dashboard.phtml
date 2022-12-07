@@ -1,0 +1,19 @@
+<head>
+    <link rel="stylesheet" href=<?php echo $paths['CSS_PATH'] . "dashboard.css"; ?>>
+</head>
+<a href="index.php"><h1>Home</h1></a>
+
+<?php
+    if (file_exists($dashboard_model)) {
+        require $dashboard_model;
+    }
+
+    if (file_exists($dashboard_view)) {
+        require $dashboard_view;
+    } else {
+        require $_404;
+    }
+
+?>
+
+<script src=<?php echo $paths['JS_PATH'] . "nav-toggle.js"; ?>></script>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student</title>
+</head>
+<body>
+    <div class="body-container">
+        
+        <?php 
+            if (file_exists($navigation_bar)) {
+                require $navigation_bar;
+            }
+            echo "<main>";
+            if ($picked_student_id) {
+                if ($picked_student) {
+                    ?>
+                    <form method="POST" action="<?php echo $paths['CONTROLLER_PATH'] . 'update-student.php' ?>">
+                        <input type="hidden" name="studentid" value=<?php echo $picked_student_id; ?>>
+                        <div class="input-group">
+                            <label>First name: </label>
+                            <input type="text" name="firstname" value=<?php echo $picked_student->first_name; ?>>
+                        </div>
+                        <div class="input-group">
+                            <label>Middle name: </label>
+                            <input type="text" name="middlename" value=<?php echo $picked_student->middle_name; ?>>
+                        </div>
+                        <div class="input-group">
+                            <label>Last name: </label>
+                            <input type="text" name="lastname" value=<?php echo $picked_student->last_name; ?>>
+                        </div>
+                        <div class="input-group">
+                            <label>Program: </label>
+                            <input type="text" name="program" value=<?php echo $picked_student->program; ?>>
+                        </div>
+                        <div class="input-group">
+                            <label>Year level: </label>
+                            <input type="text" name="yearlevel" value=<?php echo $picked_student->year_level; ?>>
+                        </div>
+                        <div class="input-group">
+                            <input type="submit" value="Update" >
+                        </div>
+                    </form>
+                    <?php
+                } else {
+                    echo "<h5>Student not found</h5><br/>
+                    <a href= " . $dashboard_paths['BASE_PATH'] . "&current=update-student" . ">Search again</a>";
+                }
+            } else { 
+                ?>
+                    <form action=<?php echo $dashboard_paths['BASE_PATH']; ?>>
+                        <input type="hidden" name="page" value="dashboard">
+                        <input type="hidden" name="current" value="update-student">
+                        <h4>Search for a student</h4>
+                        <label>Enter the student id here: </label>
+                        <input type="number" name="studentid" >
+                        <input type="submit" value="Search">
+                    </form>
+                    <?php
+            }
+            ?>
+        </main>
+    </div>
+</body>
+</html>

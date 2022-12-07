@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Student</title>
+</head>
+<body>
+    <div class="body-container">
+        <?php 
+            if (file_exists($navigation_bar)) {
+                require $navigation_bar;
+            }
+        ?>
+        <main>
+            <h2>Create a student</h2>
+            <form method="POST" action=<?php echo $paths['CONTROLLER_PATH'] . 'add-student.php' ?>>
+                <div class="input-group">
+                    <label>Student ID: </label>
+                    <input type="number" name="studentid" />
+                </div>
+                <div class="input-group">
+                    <label>First name: </label>
+                    <input type="text" name="firstname" />
+                </div>
+                <div class="input-group">
+                    <label>Middle name: </label>
+                    <input type="text" name="middlename" />
+                </div>
+                <div class="input-group">
+                    <label>Last name: </label>
+                    <input type="text" name="lastname" />
+                </div>
+                <div class="input-group">
+                    <label>Program: </label>
+                    <input type="text" name="program" />
+                </div>
+                <div class="input-group">
+                    <label>Year level: </label>
+                    <input type="number" name="yearlevel" />
+                </div>
+                <div class="input-group">
+                    <input type="submit" value="Create" />
+                </div>
+            </form>
+        </main>
+    </div>
+</body>
+</html>

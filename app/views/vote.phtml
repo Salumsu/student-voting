@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo $paths['CSS_PATH']; ?>votepage.css">
+    <title>Vote</title>
+</head>
+<body>
+    <script>
+        let positions = [];
+    </script>
+    <?php 
+     if ($voters_key) {
+        if ($student) {
+            if ($student->vote_status == 0) {
+                ?>
+                    <form method="POST" action=<?php echo $paths['CONTROLLER_PATH'] . 'record-vote.php'; ?>>
+                        <input type="hidden" name="studentid" value=<?php echo $student->student_id; ?>>
+                        <?php 
+                            for ($i = 0; $i < $positions->position_count; $i++) {
+                                $position = $positions->positions[$i];
+                                [$candidates_list, $candidates_count] = $candidates->get_candidates_by_position_index($position->position_index);
+                                ?>
+                                    <script>
+                                        positions.push('<?php echo strtolower($position->position); ?>');
+                                    </script>
+                                    <div class="position <?php echo strtolower($position->position); ?>" data-limit=<?php echo $position->validvote; ?>>
+                                    <h2><?php echo $position->position ?></h2>
+                                <?php
+                                for ($j = 0; $j < $candidates_count; $j++) {
+                                    $candidate = $candidates_list[$j];
+                                    ?>
+                                        <input type="checkbox" onClick="return checkLimit('<?php echo strtolower($position->position); ?>')" name=<?php echo strtolower($position->position); ?> value=<?php echo $candidate->candidate_id;  ?>>
+                                            <?php 
+                                                echo $candidate->candidate_name;
+                                            ?>
+                                        </input>
+                                    <?php
+                                }
+                                ?>
+                                    </div>
+                                <?php
+                            } 
+                        ?>
+                        <div class="nav-buttons">
+                            <button type="button" id="prev" class="nav-button ">prev</button>
+                            <button type="button" id="next" class="nav-button active">next</button>
+                        </div>
+                        <input type="submit" value="Submit" id="submit">
+                    </form>
+                <?php
+            } else {
+                "
+                <p>Student has already voted</p>
+                <a href='index.php?page=vote'>Try other key</a>";
+            }
+        } else {
+            echo "
+                <p>Invalid voter's key</p>
+                <a href='index.php?page=vote'>Try again</a>";
+        }
+     } else {
+        ?>
+            <form method="GET">
+                <input type="hidden" name="page" value="vote">
+                <label>Enter voters key</label><br/>
+                <input type="text" name="voterskey">
+                <input type="submit" value="Check">
+            </form>
+        <?php
+     }
+    ?>
+    <script src=<?php echo $paths['JS_PATH'] . 'validate-choices.js'; ?>>
+        
+    </script>
+    <script src=<?php echo $paths['JS_PATH'] . 'limit-choices.js'; ?>></script>
+    <script src=<?php echo $paths['JS_PATH'] . 'vote-navigate.js'; ?>></script>
+</body>
+</html>

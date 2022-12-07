@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidates List</title>
+</head>
+<body>
+    <div class="body-container">
+        <?php
+            if (file_exists($navigation_bar)) {
+                require $navigation_bar;
+            }
+        ?>
+        <main>
+            <?php
+                $candidates->candidates_table(true);
+                ?>
+        </main>
+    </div>
+</body>
+</html>

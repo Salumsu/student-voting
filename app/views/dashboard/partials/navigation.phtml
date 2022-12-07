@@ -1,0 +1,26 @@
+<nav>
+    <div class="main-nav active">
+        <h5>Students</h5>
+        <ul>
+            <li><a href=<?php echo $dashboard_paths['BASE_PATH']; ?>><button>List</button></a></li>
+            <li><a href=<?php echo $dashboard_paths['BASE_PATH'] . "&current=create-student" ?>><button>Create</button></a></li>
+            <li><a href=<?php echo $dashboard_paths['BASE_PATH'] . "&current=update-student"; ?>><button>Update Student</button></a></li>
+        </ul>
+    </div>
+    <div class="main-nav active">
+        <h5>Candidates</h5>
+        <ul>
+            <li><a href=<?php echo $dashboard_paths['BASE_PATH'] . "&current=candidate-list"; ?>><button>List</button></a></li>
+            <li><a href=<?php echo $dashboard_paths['BASE_PATH'] . "&current=create-candidate" ?>><button>Create Candidate</button></a></li>
+            <li><a href=<?php echo $dashboard_paths['BASE_PATH'] . "&current=update-candidate" ?>><button>Update Candidate</button></a></li>
+        </ul>
+    </div>
+    <div class="main-nav active">
+        <h5>Positions</h5>
+        <ul>
+            <li><a href=<?php echo $dashboard_paths['BASE_PATH'] . "&current=position-list" ?>><button>List</button></a></li>
+            <li><a href=<?php echo $dashboard_paths['BASE_PATH'] . "&current=create-position" ?>><button>Create Position</button></a></li>
+            <li><a href=<?php echo $dashboard_paths['BASE_PATH'] . "&current=update-position" ?>><button>Update Position</button></a></li>
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create candidate</title>
+</head>
+<body>
+    <div class="body-container">
+
+            <?php 
+            if (file_exists($navigation_bar)) {
+                require $navigation_bar;
+            }
+            ?>
+        <main>
+            <h2>Create a new candidate</h2>
+            <?php
+            if ($picked_student_id) {
+                if (!$is_candidate) {
+                    if ($picked_student) {
+                        echo "<h3>Currently selected student: </h3>";
+                        $picked_student->table_solo();
+                    ?>
+                        <form method="POST" action=<?php echo $paths['CONTROLLER_PATH'] . 'add-candidate.php' ?>>
+                            <?php
+                        echo "<input type='hidden' name='fullname' value='$picked_student->first_name $picked_student->middle_name $picked_student->last_name'>
+                        <input type='hidden' name='studentid' value='$picked_student->student_id'>
+                        <input type='hidden' name='yearlevel' value='$picked_student->year_level'>";
+                        $positions->form_select();
+                        
+                        echo "<input type='submit' value='Create'>
+                        </form>";
+                        
+                    } else {
+                    echo "<h5>Student not found</h5><br/>
+                    <a href= " . $dashboard_paths['BASE_PATH'] . "&current=create-candidate" . ">Search again</a>";
+                    }
+                } else {
+                    echo "<h5>This student is already a candidate</h5><br/>
+                    <a href= " . $dashboard_paths['BASE_PATH'] . "&current=create-candidate" . ">Search again</a>";
+                }
+            } else {
+                ?>
+                    <form action=<?php echo $dashboard_paths['BASE_PATH']; ?>>
+                        <input type="hidden" name="page" value="dashboard">
+                        <input type="hidden" name="current" value="create-candidate">
+                        <h4>Search for a student</h4>
+                        <label>Enter the student id here: </label>
+                        <input type="number" name="studentid" >
+                        <input type="submit" value="Search">
+                    </form>
+                    <?php
+            }
+            ?>
+        </main>
+    </div>
+</body>
+</html>

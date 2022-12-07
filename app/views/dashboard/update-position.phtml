@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update position</title>
+</head>
+<body>
+    <div class="body-container">
+
+        <?php 
+            if (file_exists($navigation_bar)) {
+                require $navigation_bar;
+            }
+            
+            echo "<main>";
+            if ($picked_position_index) {
+                if ($picked_position) {
+                    ?>
+                    <form method="POST" action="<?php echo $paths['CONTROLLER_PATH'] . 'update-position.php' ?>">
+                        <input type="hidden" name="positionindex" value=<?php echo $picked_position_index; ?>>
+                        <div class="input-group">
+                            <label>Position name: </label>
+                            <input type="text" name="position_name" value=<?php echo $picked_position->position; ?>>
+                        </div>
+                        <div class="input-group">
+                            <input type="submit" value="Update" >
+                        </div>
+                    </form>
+                    <?php
+                } else {
+                    echo "<h5>Position not found</h5><br/>
+                    <a href= " . $dashboard_paths['BASE_PATH'] . "&current=update-position" . ">Search again</a>";
+                }
+            } else {
+                ?>
+                    <form action=<?php echo $dashboard_paths['BASE_PATH']; ?>>
+                        <input type="hidden" name="page" value="dashboard">
+                        <input type="hidden" name="current" value="update-position">
+                        <h4>Search for a position</h4>
+                        <label>Enter the position index here: </label>
+                        <input type="number" name="positionindex" >
+                        <input type="submit" value="Search">
+                    </form>
+                    <?php
+            }
+            ?>
+        </main>
+    </div>
+</body>
+</html>
